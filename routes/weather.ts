@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import express, { Request, Response, Router } from 'express'
+import express, { Request, Response, Router, Errback } from 'express'
 import axios from 'axios'
 const router: Router = express.Router()
 
@@ -14,8 +14,17 @@ router.get('/', async (req: Request, res: Response) => {
     res.status(400)
     res.json({ error: 'Add query params lat and lon' })
   }
-  const response = await axios.get(url)
-  res.json(response.data)
+  try {
+    const response = await axios.get(url)
+    res.json(response.data)
+  } catch (error: any) {
+    if (error.response) {
+      res.status(error.response.status)
+      res.json(error.response.data)
+    }
+    res.status(408)
+    res.json(error.response.data)
+  }
 })
 
 export default router
