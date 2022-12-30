@@ -10,7 +10,7 @@ const app: Application = express()
 app.use(
   cors({
     origin: [
-      'http://localhost:3000',
+      'http://localhost:5173',
       'https://chiffenok-weather-app.onrender.com',
     ],
   })

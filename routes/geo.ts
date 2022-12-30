@@ -4,7 +4,7 @@ import axios from 'axios'
 const router: Router = express.Router()
 
 const apiPath = (q: string) =>
-  `http://api.openweathermap.org/geo/1.0/direct?q=${q}&limit=5&appid=${process.env.REACT_APP_APPID}`
+  `http://api.openweathermap.org/geo/1.0/direct?q=${q}&limit=5&appid=${process.env.APPID}`
 
 router.get('/', async (req: Request, res: Response) => {
   const q = req.query.q as string
